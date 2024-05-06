@@ -39,6 +39,7 @@ struct TaskView: View {
                 VStack(spacing: 10) {
                     if !filteredTasks.isEmpty{
                         ForEach(filteredTasks.keys.sorted(), id: \.self) { key in
+                            NavigationLink(destination: TaskDetail(key: key, tasks: tasks)){
                             taskCard(key:key, tasks: filteredTasks)
                                 .padding(.horizontal)
                                 .contextMenu{
@@ -71,6 +72,7 @@ struct TaskView: View {
                                         Label("Change status", systemImage: "slider.horizontal.3")
                                     }
                                 }
+                        }
                         }
                     } else {
                         Text("No tasks to show")

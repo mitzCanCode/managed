@@ -31,7 +31,7 @@ struct HabitsView: View {
             }
         }
     }
-
+    
     
     
     var body: some View {
@@ -40,48 +40,51 @@ struct HabitsView: View {
                 VStack(spacing: 10) {
                     if !filteredHabits.isEmpty{
                         ForEach(filteredHabits.keys.sorted(), id: \.self) { key in
-                            HabitCard(key:key, habits: filteredHabits)
-                                .padding(.horizontal)
-                                .contextMenu{
-                                    Button(role: .destructive, action: {
-                                        deleteHabit(key: key)
-                                    }, label: {
-                                        Label("Delete", systemImage: "trash")
-                                    })
-                                    Menu{
-                                        Button {
-                                            habits[key]?["status"] = "0"
-                                            UserDefaults.standard.set(habits, forKey: "habits")
-                                            print(habits)
-
+                            
+                            NavigationLink(destination: HabitDetail(key: key, habits: habits)){
+                                HabitCard(key:key, habits: filteredHabits)
+                                    .padding(.horizontal)
+                                    .contextMenu{
+                                        Button(role: .destructive, action: {
+                                            deleteHabit(key: key)
+                                        }, label: {
+                                            Label("Delete", systemImage: "trash")
+                                        })
+                                        Menu{
+                                            Button {
+                                                habits[key]?["status"] = "0"
+                                                UserDefaults.standard.set(habits, forKey: "habits")
+                                                print(habits)
+                                                
+                                            } label: {
+                                                Label("Not Done", systemImage: habits[key]?["status"] == "0" ? "x.circle.fill" : "x.circle")
+                                            }
+                                            
+                                            Button {
+                                                habits[key]?["status"] = "1"
+                                                UserDefaults.standard.set(habits, forKey: "habits")
+                                                print(habits)
+                                                
+                                            } label: {
+                                                Label("In Progress", systemImage: habits[key]?["status"] == "1" ? "circle.dotted.circle.fill" : "circle.dotted.circle")
+                                            }
+                                            Button {
+                                                habits[key]?["status"] = "2"
+                                                UserDefaults.standard.set(habits, forKey: "habits")
+                                                print(habits)
+                                            } label: {
+                                                Label("Done", systemImage: habits[key]?["status"] == "2" ? "checkmark.circle.fill" : "checkmark.circle")
+                                            }
                                         } label: {
-                                            Label("Not Done", systemImage: habits[key]?["status"] == "0" ? "x.circle.fill" : "x.circle")
+                                            Label("Change status", systemImage: "slider.horizontal.3")
                                         }
-                                        
-                                        Button {
-                                            habits[key]?["status"] = "1"
-                                            UserDefaults.standard.set(habits, forKey: "habits")
-                                            print(habits)
-
-                                        } label: {
-                                            Label("In Progress", systemImage: habits[key]?["status"] == "1" ? "circle.dotted.circle.fill" : "circle.dotted.circle")
-                                        }
-                                        Button {
-                                            habits[key]?["status"] = "2"
-                                            UserDefaults.standard.set(habits, forKey: "habits")
-                                            print(habits)
-                                        } label: {
-                                            Label("Done", systemImage: habits[key]?["status"] == "2" ? "checkmark.circle.fill" : "checkmark.circle")
-                                        }
-                                    } label: {
-                                        Label("Change status", systemImage: "slider.horizontal.3")
                                     }
-                                }
-                                .onAppear{
-                                    updateHabitStatusIfNeeded(key: key)
-                                }
-                            
-                            
+                                    .onAppear{
+                                        updateHabitStatusIfNeeded(key: key)
+                                    }
+                                
+                            }
+                                
                         }
                     } else {
                         Text("No habits to show")
@@ -157,7 +160,7 @@ struct HabitsView: View {
             print("Error fetching habits")
         }
         
-
+        
     }
     
     func updateHabitStatusIfNeeded(key: String) {
@@ -180,7 +183,7 @@ struct HabitsView: View {
             print("Habit status updated for \(key)")
         }
     }
-
+    
     func deleteHabit(key: String) {
         habits.removeValue(forKey: key)
         UserDefaults.standard.set(habits, forKey: "habits")
