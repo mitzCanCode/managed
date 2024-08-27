@@ -62,7 +62,8 @@ struct TaskDetail: View {
             .padding(.horizontal)
 
 
-            }            
+            }
+        .navigationTitle("Edit task")
         .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {

@@ -20,13 +20,12 @@ struct HabitDetail: View {
             VStack(alignment: .leading, spacing: 10){
                 if let habit = habits[key]{
                     TextField("Habit title", text: $editedHabitTitle)
+                        .padding()
+                        .blurredBackground()
                         .onAppear{
                             editedHabitTitle = habit["habitName"] ?? "Error fetching habit name"
                         }
-                    TextEditor(text: $editedHabitDescription)
-                        .onAppear{
-                            editedHabitDescription = habit["description"] ?? "Error fetching task description"
-                        }
+                    
                     HStack {
                         Text("Habit time:")
                         Spacer()
@@ -40,6 +39,18 @@ struct HabitDetail: View {
                                 }
                             }
                     }
+                    .padding()
+                    .blurredBackground()
+                    
+                    TextEditor(text: $editedHabitDescription)
+                        .frame(minHeight: 100)
+                        .scrollContentBackground(.hidden)
+                        .background(.clear)
+                        .padding()
+                        .blurredBackground()
+                        .onAppear{
+                            editedHabitDescription = habit["description"] ?? "Error fetching task description"
+                        }
                     HStack {
                         Text("Habit status:")
                         Spacer()
@@ -50,14 +61,18 @@ struct HabitDetail: View {
                         }
                         .pickerStyle(SegmentedPickerStyle())
                     }
+                    .padding()
+                    .blurredBackground()
                 }
             }
-            .padding()
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
-                        saveChanges()
-                    }
+            .padding(.horizontal)
+            
+        }
+        .navigationTitle("Edit habit")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Save") {
+                    saveChanges()
                 }
             }
         }

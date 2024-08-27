@@ -10,7 +10,6 @@ import SwiftUI
 struct HabitsView: View {
     @State var habits: [String:[String:String]] = [:]
     @State var addHabitSheet: Bool = false
-    
     @State var filterStatus: String? = nil
     @State private var searchText = ""
     
