@@ -18,19 +18,19 @@ struct addTask: View {
         VStack {
             TextField("Task title", text: $taskName)
                 .padding()
-                .blurredBackground()
+                .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
             HStack {
                 Text("Deadline:")
                 Spacer()
                 DatePicker("", selection: $selectedDeadline, displayedComponents: .date)
             }
             .padding()
-            .blurredBackground()
+            .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
             TextEditor(text: $taskDescription)
                 .scrollContentBackground(.hidden)
                 .background(.clear)
                 .padding()
-                .blurredBackground()
+                .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
             Button {
                 addTask(taskName: taskName, description: taskDescription)
             } label: {
@@ -40,7 +40,7 @@ struct addTask: View {
                     Spacer()
                 }
                 .padding()
-                .blurredBackground()
+                .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
             }
         }
         .padding()

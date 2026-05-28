@@ -86,7 +86,7 @@ struct HabitCard: View {
                     
                 }
                 .padding()
-                .blurredBackground()
+                .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
             }
         }
     }

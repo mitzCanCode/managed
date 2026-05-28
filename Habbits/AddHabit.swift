@@ -19,19 +19,19 @@ struct AddHabit: View {
         VStack {
             TextField("Habit title", text: $habitName)
                 .padding()
-                .blurredBackground()
+                .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
             HStack {
                 Text("Habit time:")
                 Spacer()
                 DatePicker("", selection: $selectedTime, displayedComponents: .hourAndMinute)
             }
             .padding()
-            .blurredBackground()
+            .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
             TextEditor(text: $habitDescription)
                 .scrollContentBackground(.hidden)
                 .background(.clear)
                 .padding()
-                .blurredBackground()
+                .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
             Button {
                 addHabit(habitName: habitName, description: habitDescription, time: selectedTime)
             } label: {
@@ -41,7 +41,7 @@ struct AddHabit: View {
                     Spacer()
                 }
                 .padding()
-                .blurredBackground()
+                .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
             }
         }
         .padding()

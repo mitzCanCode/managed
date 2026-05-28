@@ -21,7 +21,7 @@ struct HabitDetail: View {
                 if let habit = habits[key]{
                     TextField("Habit title", text: $editedHabitTitle)
                         .padding()
-                        .blurredBackground()
+                        .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
                         .onAppear{
                             editedHabitTitle = habit["habitName"] ?? "Error fetching habit name"
                         }
@@ -40,14 +40,14 @@ struct HabitDetail: View {
                             }
                     }
                     .padding()
-                    .blurredBackground()
+                    .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
                     
                     TextEditor(text: $editedHabitDescription)
                         .frame(minHeight: 100)
                         .scrollContentBackground(.hidden)
                         .background(.clear)
                         .padding()
-                        .blurredBackground()
+                        .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
                         .onAppear{
                             editedHabitDescription = habit["description"] ?? "Error fetching task description"
                         }
@@ -62,7 +62,7 @@ struct HabitDetail: View {
                         .pickerStyle(SegmentedPickerStyle())
                     }
                     .padding()
-                    .blurredBackground()
+                    .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
                 }
             }
             .padding(.horizontal)

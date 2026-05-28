@@ -21,13 +21,13 @@ struct TaskDetail: View {
                 if let task = tasks[key] {
                     TextField("Task title", text: $editedTaskName)
                         .padding()
-                        .blurredBackground()
+                        .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
                         .onAppear {
                             editedTaskName = task["taskName"] ?? "Error fetching task name"
                         }
                     DatePicker("Deadline", selection: $editedDeadline, displayedComponents: .date)
                         .padding()
-                        .blurredBackground()
+                        .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
                         .onAppear {
                             // Convert the deadline string to Date and set it to editedDeadline
                             let dateFormatter = DateFormatter()
@@ -41,7 +41,7 @@ struct TaskDetail: View {
                         .scrollContentBackground(.hidden)
                         .background(.clear)
                         .padding()
-                        .blurredBackground()
+                        .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
                         .onAppear {
                             editedTaskDescription = task["description"] ?? "Error fetching task description"
                         }
@@ -56,7 +56,7 @@ struct TaskDetail: View {
                         .pickerStyle(SegmentedPickerStyle())
                     }
                     .padding()
-                    .blurredBackground()
+                    .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 15))
                 }
             }
             .padding(.horizontal)
